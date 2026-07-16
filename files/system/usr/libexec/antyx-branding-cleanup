@@ -1,0 +1,81 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# Remove user-facing Bazzite branding only.
+# Internal Bazzite services and binaries stay because Antyx-OS uses that base.
+
+hide_desktop_file() {
+  local desktop="$1"
+  grep -q '^NoDisplay=true$' "$desktop" 2>/dev/null ||
+    printf '\nNoDisplay=true\n' >> "$desktop"
+}
+
+# Hide branded application and autostart entries.
+for directory in \
+  /usr/share/applications \
+  /etc/xdg/autostart \
+  /usr/share/kglobalaccel; do
+  [[ -d "$directory" ]] || continue
+
+  while IFS= read -r -d '' file; do
+    case "$(basename "$file")" in
+      antyx-*) continue ;;
+    esac
+
+    if grep -qiE 'bazzite|ublue-os|universal blue' "$file" 2>/dev/null; then
+      hide_desktop_file "$file"
+    fi
+  done < <(find "$directory" -maxdepth 2 -type f -name '*.desktop' -print0)
+done
+
+# Remove branded visual assets while preserving functional packages.
+for directory in \
+  /usr/share/backgrounds \
+  /usr/share/wallpapers \
+  /usr/share/pixmaps \
+  /usr/share/icons \
+  /usr/share/plymouth/themes \
+  /usr/share/sddm/themes; do
+  [[ -d "$directory" ]] || continue
+
+  find "$directory" -maxdepth 5 \
+    \( -iname '*bazzite*' -o -iname '*ublue*' \) \
+    -type f -delete 2>/dev/null || true
+done
+
+# Remove branded MOTD and documentation fragments.
+for directory in /etc/motd.d /usr/lib/motd.d /usr/share/ublue-os/motd; do
+  [[ -d "$directory" ]] || continue
+  find "$directory" -maxdepth 3 -type f \
+    \( -iname '*bazzite*' -o -iname '*ublue*' \) \
+    -delete 2>/dev/null || true
+done
+
+# Replace visible wording only in safe text/config locations.
+for directory in \
+  /etc/issue.d \
+  /etc/profile.d \
+  /usr/share/applications \
+  /etc/xdg/autostart; do
+  [[ -d "$directory" ]] || continue
+
+  while IFS= read -r -d '' file; do
+    file "$file" 2>/dev/null |
+      grep -qE 'text|script|JSON|XML|desktop|configuration' || continue
+
+    sed -i \
+      -e 's/Bazzite/Antyx-OS/g' \
+      -e 's/bazzite\.gg/antyx-os.netlify.app/g' \
+      "$file" 2>/dev/null || true
+  done < <(find "$directory" -maxdepth 3 -type f -print0)
+done
+
+# Keep required base hardware setup logic, but remove visible branding.
+if [[ -f /usr/libexec/bazzite-hardware-setup ]]; then
+  sed -i \
+    -e 's/Preparing System - Please wait, this may take a while/Preparing Antyx-OS - Please wait, this may take a while/g' \
+    -e 's/hostnamectl set-hostname bazzite/hostnamectl set-hostname antyx-os/g' \
+    /usr/libexec/bazzite-hardware-setup
+fi
+
+update-desktop-database /usr/share/applications 2>/dev/null || true
