@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+MARKER="${HOME}/.config/antyx/branding-applied"
+mkdir -p "$(dirname "$MARKER")"
+[[ -f "$MARKER" ]] && exit 0
+
+if command -v plasma-apply-colorscheme >/dev/null 2>&1; then
+  plasma-apply-colorscheme Antyx || true
+fi
+
+WALL="/usr/share/backgrounds/antyx/antyx-default.png"
+[[ -f "$WALL" ]] || WALL="/usr/share/backgrounds/antyx/antyx-default.svg"
+
+if command -v qdbus6 >/dev/null 2>&1; then
+  SCRIPT="var allDesktops = desktops(); for (i=0;i<allDesktops.length;i++){d=allDesktops[i];d.wallpaperPlugin='org.kde.image';d.currentConfigGroup=['Wallpaper','org.kde.image','General'];d.writeConfig('Image','file://${WALL}');}"
+  qdbus6 org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "$SCRIPT" || true
+fi
+
+touch "$MARKER"

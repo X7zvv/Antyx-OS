@@ -25,17 +25,17 @@ Antyx-OS ist in dieser Phase ein privates Testprojekt. Veröffentliche keine ISO
 4. Wähle die automatische Einrichtung der Container-Signierung.
 5. Lass die vom Workshop erstellte Datei `cosign.pub` im Repository.
 6. Kopiere danach die Dateien aus diesem Starterprojekt in das Repository.
-7. Ersetze überall `X7zvv` mit deinem echten GitHub-Namen.
+7. Ersetze überall `DEIN_GITHUB_NAME` mit deinem echten GitHub-Namen.
 8. Committe und pushe die Dateien.
 9. Öffne auf GitHub den Reiter **Actions** und starte **Build Antyx-OS**.
 
 ## Installation auf einem bestehenden Bazzite-System
 
-Ersetze `X7zvv`:
+Ersetze `DEIN_GITHUB_NAME`:
 
 ```bash
 sudo rpm-ostree rebase \
-  ostree-unverified-registry:ghcr.io/X7zvv/antyx-os:latest
+  ostree-unverified-registry:ghcr.io/DEIN_GITHUB_NAME/antyx-os:latest
 
 systemctl reboot
 ```
@@ -44,7 +44,7 @@ Nach dem ersten erfolgreichen Start auf das signierte Image wechseln:
 
 ```bash
 sudo rpm-ostree rebase \
-  ostree-image-signed:docker://ghcr.io/X7zvv/antyx-os:latest
+  ostree-image-signed:docker://ghcr.io/DEIN_GITHUB_NAME/antyx-os:latest
 
 systemctl reboot
 ```
@@ -80,8 +80,13 @@ antyx-info
 - [x] Brave und Gaming-Apps
 - [x] Ausgewogene Sicherheitsbasis
 - [x] Erste Website
-- [ ] Eigenes Logo
-- [ ] Wallpaper und KDE-Branding
+- [x] Eigenes Logo
+- [x] Wallpaper und KDE-Branding
 - [ ] Eigene Secure-Boot-Schlüssel
 - [ ] Installierbare ISO
 - [ ] Antyx-Hub
+
+
+## Branding
+
+Siehe [`docs/BRANDING.md`](docs/BRANDING.md) und [`branding/BRAND-GUIDE.md`](branding/BRAND-GUIDE.md).

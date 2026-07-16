@@ -1,0 +1,13 @@
+Window.SetBackgroundTopColor(0.02, 0.015, 0.035);
+Window.SetBackgroundBottomColor(0.005, 0.004, 0.01);
+
+logo.image = Image("logo.png");
+logo.sprite = Sprite(logo.image);
+logo.sprite.SetX(Window.GetWidth()/2 - logo.image.GetWidth()/2);
+logo.sprite.SetY(Window.GetHeight()/2 - logo.image.GetHeight()/2 - 35);
+
+fun refresh_callback () {
+  progress = Plymouth.GetBootProgress();
+  angle = progress * 6.28318;
+}
+Plymouth.SetRefreshFunction(refresh_callback);

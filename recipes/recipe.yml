@@ -41,10 +41,10 @@ modules:
       PRETTY_NAME: Antyx-OS Secure Gaming
       VARIANT: KDE NVIDIA
       VARIANT_ID: antyx
-      HOME_URL: https://github.com/X7zvv/antyx-os
-      DOCUMENTATION_URL: https://github.com/X7zvv/antyx-os/tree/main/docs
-      SUPPORT_URL: https://github.com/X7zvv/antyx-os/issues
-      BUG_REPORT_URL: https://github.com/X7zvv/antyx-os/issues
+      HOME_URL: https://github.com/DEIN_GITHUB_NAME/antyx-os
+      DOCUMENTATION_URL: https://github.com/DEIN_GITHUB_NAME/antyx-os/tree/main/docs
+      SUPPORT_URL: https://github.com/DEIN_GITHUB_NAME/antyx-os/issues
+      BUG_REPORT_URL: https://github.com/DEIN_GITHUB_NAME/antyx-os/issues
 
   # Installs the public cosign policy/key generated for your repository.
   - type: signing

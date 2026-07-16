@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 1024">
+  <defs>
+    <linearGradient id="purple" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#C39BFF"/>
+      <stop offset="0.45" stop-color="#8A4DFF"/>
+      <stop offset="1" stop-color="#6524D6"/>
+    </linearGradient>
+    <linearGradient id="white" x1="0" y1="0" x2="0.7" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.55" stop-color="#F2EEFF"/>
+      <stop offset="1" stop-color="#CFC7E8"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- Broken orbital ring -->
+  <path d="M231 699 A364 364 0 0 1 756 220"
+        fill="none" stroke="url(#white)" stroke-width="44" stroke-linecap="square"/>
+  <path d="M807 267 A364 364 0 0 1 836 640"
+        fill="none" stroke="url(#purple)" stroke-width="44" stroke-linecap="square"
+        filter="url(#glow)"/>
+  <path d="M731 785 A364 364 0 0 1 381 827"
+        fill="none" stroke="url(#purple)" stroke-width="44" stroke-linecap="square"
+        filter="url(#glow)"/>
+  <path d="M329 808 L286 785" stroke="url(#purple)" stroke-width="44"/>
+
+  <!-- Angular A -->
+  <path d="M185 789 L504 155 L850 797 L723 722 L504 323 L364 602 L547 501 L603 551 L297 752 Z"
+        fill="url(#white)"/>
+  <!-- Purple motion cut -->
+  <path d="M354 746 L594 566 L641 624 L456 795 Z"
+        fill="url(#purple)" filter="url(#glow)"/>
+</svg>

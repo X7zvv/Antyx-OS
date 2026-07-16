@@ -4,8 +4,8 @@
   --line: #202923;
   --text: #f4f7f5;
   --muted: #9ba8a0;
-  --green: #54ff83;
-  --green-dark: #163f24;
+  --green: #9555ff;
+  --green-dark: #3a176b;
 }
 
 * { box-sizing: border-box; }
@@ -121,3 +121,5 @@ footer {
   .grid { grid-template-columns: 1fr; }
   h1 { font-size: 3.2rem; }
 }
+
+.brand-logo { width: 2.25rem; height: 2.25rem; object-fit: contain; }

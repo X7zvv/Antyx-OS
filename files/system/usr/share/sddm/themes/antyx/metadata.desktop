@@ -1,0 +1,13 @@
+[SddmGreeterTheme]
+Name=Antyx
+Description=Antyx-OS white and purple login theme
+Author=Antyx-OS
+Copyright=(c) 2026 Antyx-OS
+License=MIT
+Type=sddm-theme
+Version=0.1
+MainScript=Main.qml
+ConfigFile=theme.conf
+TranslationsDirectory=translations
+Theme-Id=antyx
+Theme-API=2.0
