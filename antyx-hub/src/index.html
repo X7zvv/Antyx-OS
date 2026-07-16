@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="dark">
+  <title>Antyx Hub</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="ambient ambient-a"></div>
+  <div class="ambient ambient-b"></div>
+
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <img src="logo.svg" alt="">
+        <div>
+          <strong>ANTYX HUB</strong>
+          <span>Control Center</span>
+        </div>
+      </div>
+
+      <nav>
+        <button class="nav-item active" data-page="dashboard"><span>◫</span>Dashboard</button>
+        <button class="nav-item" data-page="gaming"><span>◇</span>Gaming</button>
+        <button class="nav-item" data-page="security"><span>⬡</span>Security</button>
+        <button class="nav-item" data-page="updates"><span>↻</span>Updates</button>
+        <button class="nav-item" data-page="system"><span>◉</span>System</button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <div class="privacy">
+          <i></i>
+          <div><strong>Local only</strong><span>No telemetry</span></div>
+        </div>
+        <span class="version">Antyx Hub v0.1</span>
+      </div>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">ANTYX-OS CONTROL CENTER</p>
+          <h1 id="page-title">Dashboard</h1>
+        </div>
+        <div class="top-actions">
+          <span class="status-chip"><i></i><b id="system-state">Checking system</b></span>
+          <button id="refresh-button" class="icon-button" title="Refresh">↻</button>
+        </div>
+      </header>
+
+      <section id="dashboard" class="page active">
+        <div class="welcome-card">
+          <div>
+            <span class="mini-label">SYSTEM HEALTH</span>
+            <h2 id="welcome-heading">Loading your system…</h2>
+            <p id="welcome-text">Antyx Hub is reading local hardware and security status.</p>
+          </div>
+          <div class="score-ring" id="score-ring">
+            <div><strong id="security-score">--</strong><span>/ 100</span></div>
+          </div>
+        </div>
+
+        <div class="metric-grid">
+          <article class="metric-card">
+            <div class="metric-head"><span>CPU</span><b id="cpu-value">--%</b></div>
+            <div class="meter"><i id="cpu-bar"></i></div>
+            <p id="cpu-name">Detecting processor</p>
+          </article>
+          <article class="metric-card">
+            <div class="metric-head"><span>GPU</span><b id="gpu-value">--%</b></div>
+            <div class="meter"><i id="gpu-bar"></i></div>
+            <p id="gpu-name">Detecting graphics device</p>
+          </article>
+          <article class="metric-card">
+            <div class="metric-head"><span>MEMORY</span><b id="ram-value">--%</b></div>
+            <div class="meter"><i id="ram-bar"></i></div>
+            <p id="ram-detail">Reading memory</p>
+          </article>
+          <article class="metric-card">
+            <div class="metric-head"><span>STORAGE</span><b id="disk-value">--%</b></div>
+            <div class="meter"><i id="disk-bar"></i></div>
+            <p id="disk-detail">Reading system drive</p>
+          </article>
+        </div>
+
+        <div class="dashboard-grid">
+          <article class="panel fastfetch-card">
+            <div class="panel-title">
+              <div><span class="mini-label">SYSTEM IDENTITY</span><h3>Fastfetch Overview</h3></div>
+              <button id="full-fastfetch" class="text-button">Full report →</button>
+            </div>
+            <div class="fastfetch-layout">
+              <div class="logo-stage"><img src="logo.svg" alt="Antyx-OS"></div>
+              <dl id="system-facts">
+                <div><dt>OS</dt><dd>Loading</dd></div>
+                <div><dt>Kernel</dt><dd>Loading</dd></div>
+                <div><dt>Desktop</dt><dd>Loading</dd></div>
+                <div><dt>CPU</dt><dd>Loading</dd></div>
+                <div><dt>GPU</dt><dd>Loading</dd></div>
+                <div><dt>Memory</dt><dd>Loading</dd></div>
+                <div><dt>Uptime</dt><dd>Loading</dd></div>
+              </dl>
+            </div>
+          </article>
+
+          <article class="panel security-card">
+            <div class="panel-title">
+              <div><span class="mini-label">PROTECTION</span><h3>Security Status</h3></div>
+              <button class="text-button jump-page" data-target="security">Details →</button>
+            </div>
+            <div id="security-list" class="status-list">
+              <div><i class="pending"></i><span>Reading security state</span><b>Checking</b></div>
+            </div>
+          </article>
+
+          <article class="panel quick-card">
+            <div class="panel-title">
+              <div><span class="mini-label">SHORTCUTS</span><h3>Quick Actions</h3></div>
+            </div>
+            <div class="quick-grid">
+              <button data-action="steam"><span>◉</span><b>Launch Steam</b><small>Game library</small></button>
+              <button data-action="update"><span>↻</span><b>Update System</b><small>Atomic + Flatpak</small></button>
+              <button data-action="flatseal"><span>⬡</span><b>App Permissions</b><small>Open Flatseal</small></button>
+              <button data-action="protonplus"><span>◇</span><b>Manage Proton</b><small>Open ProtonPlus</small></button>
+            </div>
+          </article>
+
+          <article class="panel activity-card">
+            <div class="panel-title">
+              <div><span class="mini-label">LOCAL LOG</span><h3>Recent Activity</h3></div>
+              <button id="clear-activity" class="text-button">Clear</button>
+            </div>
+            <div id="activity-list" class="activity-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="gaming" class="page">
+        <div class="section-intro">
+          <div><span class="mini-label">GAMING CENTER</span><h2>Launchers and tools</h2></div>
+          <p>Detected locally. Antyx Hub does not scan or upload your game library.</p>
+        </div>
+        <div id="gaming-apps" class="app-grid"></div>
+      </section>
+
+      <section id="security" class="page">
+        <div class="section-intro">
+          <div><span class="mini-label">SECURITY CENTER</span><h2>Real system checks</h2></div>
+          <p>The score is calculated from local security checks, not a fake static number.</p>
+        </div>
+        <div id="security-details" class="detail-grid"></div>
+      </section>
+
+      <section id="updates" class="page">
+        <div class="section-intro">
+          <div><span class="mini-label">ATOMIC UPDATES</span><h2>Keep Antyx-OS current</h2></div>
+          <p>The update action opens a visible terminal and uses the trusted Antyx update command.</p>
+        </div>
+        <article class="large-action">
+          <div>
+            <span class="mini-label">SYSTEM IMAGE + FLATPAKS</span>
+            <h3>Update Antyx-OS</h3>
+            <p>Check for a new signed system image and update installed Flatpak applications.</p>
+          </div>
+          <button data-action="update" class="primary-button">Start update</button>
+        </article>
+      </section>
+
+      <section id="system" class="page">
+        <div class="section-intro">
+          <div><span class="mini-label">SYSTEM REPORT</span><h2>Fastfetch output</h2></div>
+          <button id="copy-fastfetch" class="secondary-button">Copy report</button>
+        </div>
+        <pre id="fastfetch-output">Loading Fastfetch…</pre>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast-container"></div>
+  <script src="app.js"></script>
+</body>
+</html>

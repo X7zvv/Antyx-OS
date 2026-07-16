@@ -1,0 +1,42 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Antyx Hub",
+  "version": "0.1.0",
+  "identifier": "org.antyxos.hub",
+  "build": {
+    "frontendDist": "../src"
+  },
+  "app": {
+    "withGlobalTauri": true,
+    "windows": [
+      {
+        "title": "Antyx Hub",
+        "width": 1320,
+        "height": 850,
+        "minWidth": 880,
+        "minHeight": 650,
+        "resizable": true,
+        "fullscreen": false,
+        "center": true,
+        "decorations": true,
+        "transparent": false
+      }
+    ],
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'"
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": ["rpm", "deb"],
+    "category": "Utility",
+    "shortDescription": "Native control center for Antyx-OS",
+    "longDescription": "Antyx Hub provides system information, security checks, gaming shortcuts, updates, and Fastfetch integration for Antyx-OS.",
+    "linux": {
+      "appimage": {
+        "bundleMediaFramework": false
+      }
+    },
+    "icon": []
+  }
+}
