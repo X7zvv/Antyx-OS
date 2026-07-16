@@ -10,10 +10,9 @@ image-version: stable
 
 modules:
   # Copy the repository files into the image first.
-  - type: files
-    files:
-      - source: system
-        destination: /
+  - type: rpm-ostree
+    install:
+      - plymouth-plugin-script
 
   # Install Antyx Hub from the RPM copied into /usr/share/antyx/packages.
   - type: script
