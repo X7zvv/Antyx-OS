@@ -44,10 +44,8 @@ jobs:
 
       - name: Install BlueBuild CLI
         run: |
-          curl -fsSL \
-            https://github.com/blue-build/cli/releases/latest/download/bluebuild-linux-x86_64 \
-            -o /usr/local/bin/bluebuild
-          chmod +x /usr/local/bin/bluebuild
+          podman run --pull always --rm \
+            ghcr.io/blue-build/cli:latest-installer | sudo bash
           bluebuild --version
 
       - name: Build ISO
