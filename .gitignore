@@ -1,5 +1,5 @@
-cosign.key
-cosign.private
-/Containerfile
+.DS_Store
+Thumbs.db
 *.iso
-*.iso-CHECKSUM
+*.img
+*.log

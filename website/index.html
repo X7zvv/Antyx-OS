@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Antyx-OS Secure Gaming – ein sicheres KDE-Gaming-System auf Basis von Bazzite.">
+  <title>Antyx-OS — Secure Gaming</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="#top" aria-label="Antyx-OS Startseite">
+      <span class="mark">A</span>
+      <span>ANTYX<span class="accent">-OS</span></span>
+    </a>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#security">Sicherheit</a>
+      <a href="#status">Status</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="eyebrow">SECURE GAMING. NO NONSENSE.</div>
+      <h1>Gaming-Leistung.<br><span>Sicheres Fundament.</span></h1>
+      <p>
+        Antyx-OS kombiniert KDE Plasma, Bazzite-Gaming und ein signiertes
+        Atomic-System. Entwickelt für moderne NVIDIA-PCs.
+      </p>
+      <div class="actions">
+        <a class="button primary" href="#status">Projektstatus</a>
+        <a class="button secondary" href="#security">Sicherheitskonzept</a>
+      </div>
+      <div class="terminal">
+        <div class="terminal-top"><i></i><i></i><i></i></div>
+        <pre><span>$</span> antyx-check
+[OK] SELinux: Enforcing
+[OK] Firewall: firewalld aktiv
+[OK] Secure Boot: aktiviert
+[OK] Signiertes Atomic-Image</pre>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="section-title">
+        <small>ANTYX-OS 0.1</small>
+        <h2>Alles Wichtige. Kein unnötiger Müll.</h2>
+      </div>
+      <div class="grid">
+        <article><b>Gaming</b><p>Steam, Heroic, Lutris, ProtonPlus, MangoHud und Gamescope.</p></article>
+        <article><b>Desktop</b><p>KDE Plasma mit einem klaren, schnellen Workflow.</p></article>
+        <article><b>Browser</b><p>Brave ist ab dem ersten Start vorinstalliert.</p></article>
+        <article><b>Updates</b><p>Atomic-Updates mit Rückkehr zur vorherigen Version.</p></article>
+      </div>
+    </section>
+
+    <section id="security" class="section split">
+      <div>
+        <small>SICHERHEIT</small>
+        <h2>Sicher eingestellt, ohne Gaming kaputtzumachen.</h2>
+      </div>
+      <ul>
+        <li><span>01</span> SELinux bleibt im Enforcing-Modus.</li>
+        <li><span>02</span> Firewall ist standardmäßig aktiv.</li>
+        <li><span>03</span> Builds werden mit Cosign signiert.</li>
+        <li><span>04</span> Flatpak-Sandbox für Desktop-Apps.</li>
+        <li><span>05</span> Rollback bei fehlerhaften Updates.</li>
+      </ul>
+    </section>
+
+    <section id="status" class="section status">
+      <small>AKTUELLER STATUS</small>
+      <h2>Private Entwicklungsphase</h2>
+      <p>
+        Antyx-OS ist noch kein fertiges öffentliches Produkt. Zuerst werden
+        Build, NVIDIA-Treiber, Updates, Rollback und Installation getestet.
+      </p>
+      <div class="badge">VERSION 0.1 — FOUNDATION</div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> Antyx-OS</span>
+    <span>Community-Projekt auf Basis von Bazzite und Fedora. Keine offizielle Verbindung.</span>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

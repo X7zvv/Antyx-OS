@@ -1,43 +1,87 @@
-# Antyx-OS &nbsp; [![bluebuild build badge](https://github.com/x7zvv/antyx-os/actions/workflows/build.yml/badge.svg)](https://github.com/x7zvv/antyx-os/actions/workflows/build.yml)
+# Antyx-OS
 
-See the [BlueBuild docs](https://blue-build.org/how-to/setup/) for quick setup instructions for setting up your own repository based on this template.
+**Antyx-OS Secure Gaming** ist ein eigenes, signiertes Gaming-System auf Basis von Bazzite und Fedora Atomic.
 
-After setup, it is recommended you update this README to describe your custom image.
+## Ziel der ersten Version
 
-## Installation
+- KDE Plasma
+- moderne NVIDIA-Grafikkarten, einschließlich RTX 50-Serie
+- Brave Browser vorinstalliert
+- Steam und Gaming-Komponenten aus Bazzite
+- Heroic, Lutris, ProtonPlus, Discord, OBS, Flatseal, Mission Center und VLC
+- SELinux und Firewall bleiben aktiv
+- Atomic Updates und Rollback
+- ausgewogene Sicherheitsregeln ohne aggressive Gaming-Probleme
 
-> [!WARNING]  
-> [This is an experimental feature](https://www.fedoraproject.org/wiki/Changes/OstreeNativeContainerStable), try at your own discretion.
+## Wichtig
 
-To rebase an existing atomic Fedora installation to the latest build:
+Antyx-OS ist in dieser Phase ein privates Testprojekt. Veröffentliche keine ISO als „sicher“ oder „fertig“, bevor Builds, Updates, Installation und Rollback mehrfach getestet wurden.
 
-- First rebase to the unsigned image, to get the proper signing keys and policies installed:
-  ```
-  rpm-ostree rebase ostree-unverified-registry:ghcr.io/x7zvv/antyx-os:latest
-  ```
-- Reboot to complete the rebase:
-  ```
-  systemctl reboot
-  ```
-- Then rebase to the signed image, like so:
-  ```
-  rpm-ostree rebase ostree-image-signed:docker://ghcr.io/x7zvv/antyx-os:latest
-  ```
-- Reboot again to complete the installation
-  ```
-  systemctl reboot
-  ```
+## Repository einrichten
 
-The `latest` tag will automatically point to the latest build. That build will still always use the Fedora version specified in `recipe.yml`, so you won't get accidentally updated to the next major version.
+1. Öffne den BlueBuild Workshop.
+2. Melde dich mit GitHub an.
+3. Erstelle ein Repository namens `antyx-os`.
+4. Wähle die automatische Einrichtung der Container-Signierung.
+5. Lass die vom Workshop erstellte Datei `cosign.pub` im Repository.
+6. Kopiere danach die Dateien aus diesem Starterprojekt in das Repository.
+7. Ersetze überall `X7zvv` mit deinem echten GitHub-Namen.
+8. Committe und pushe die Dateien.
+9. Öffne auf GitHub den Reiter **Actions** und starte **Build Antyx-OS**.
 
-## ISO
+## Installation auf einem bestehenden Bazzite-System
 
-If build on Fedora Atomic, you can generate an offline ISO with the instructions available [here](https://blue-build.org/how-to/generate-iso/#_top). These ISOs cannot unfortunately be distributed on GitHub for free due to large sizes, so for public projects something else has to be used for hosting.
-
-## Verification
-
-These images are signed with [Sigstore](https://www.sigstore.dev/)'s [cosign](https://github.com/sigstore/cosign). You can verify the signature by downloading the `cosign.pub` file from this repo and running the following command:
+Ersetze `X7zvv`:
 
 ```bash
-cosign verify --key cosign.pub ghcr.io/x7zvv/antyx-os
+sudo rpm-ostree rebase \
+  ostree-unverified-registry:ghcr.io/X7zvv/antyx-os:latest
+
+systemctl reboot
 ```
+
+Nach dem ersten erfolgreichen Start auf das signierte Image wechseln:
+
+```bash
+sudo rpm-ostree rebase \
+  ostree-image-signed:docker://ghcr.io/X7zvv/antyx-os:latest
+
+systemctl reboot
+```
+
+## Rückkehr zu normalem Bazzite
+
+```bash
+sudo rpm-ostree rebase \
+  ostree-image-signed:docker://ghcr.io/ublue-os/bazzite-nvidia-open:stable
+
+systemctl reboot
+```
+
+Bei einem fehlgeschlagenen Update kannst du im Bootmenü das vorherige Deployment starten oder Folgendes verwenden:
+
+```bash
+sudo rpm-ostree rollback
+systemctl reboot
+```
+
+## Eigene Befehle
+
+```bash
+antyx-check
+antyx-update
+antyx-info
+```
+
+## Projektstatus
+
+- [x] Technische Grundstruktur
+- [x] Automatischer Image-Build
+- [x] Brave und Gaming-Apps
+- [x] Ausgewogene Sicherheitsbasis
+- [x] Erste Website
+- [ ] Eigenes Logo
+- [ ] Wallpaper und KDE-Branding
+- [ ] Eigene Secure-Boot-Schlüssel
+- [ ] Installierbare ISO
+- [ ] Antyx-Hub

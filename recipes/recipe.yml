@@ -1,45 +1,50 @@
 ---
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
-# image will be published to ghcr.io/<user>/<name>
-name: Antyx-OS
-# description will be included in the image's metadata
-description: This is my personal OS image.
 
-# the base image to build on top of (FROM) and the version tag to use
-base-image: ghcr.io/ublue-os/silverblue-main
-image-version: 42 # latest is also supported if you want new updates ASAP
+name: antyx-os
+description: Antyx-OS Secure Gaming – a security-conscious KDE gaming image based on Bazzite.
 
-# module configuration, executed in order
-# you can include multiple instances of the same module
+# RTX 50-series / modern NVIDIA GPUs.
+base-image: ghcr.io/ublue-os/bazzite-nvidia-open
+image-version: stable
+
 modules:
+  # Antyx commands and balanced security defaults.
   - type: files
     files:
       - source: system
-        destination: / # copies files/system/* (* means everything inside it) into your image's root folder /
+        destination: /
 
-  - type: dnf
-    repos:
-      copr:
-        - atim/starship
-    install:
-      packages:
-        - micro
-        - starship
-    remove:
-      packages:
-        # example: removing firefox (in favor of the flatpak)
-        # "firefox" is the main package, "firefox-langpacks" is a dependency
-        - firefox
-        - firefox-langpacks # also remove firefox dependency (not required for all packages, this is a special case)
-
+  # Desktop applications installed from Flathub.
+  # Steam, MangoHud, Gamescope and core gaming components come from Bazzite.
   - type: default-flatpaks
     configurations:
-      - notify: true # Send notification after install/uninstall is finished (true/false)
+      - notify: true
         scope: system
-        # If no repo information is specified, Flathub will be used by default
-        install: # system flatpaks we want all users to have and not remove
-          - org.mozilla.firefox
-          - org.gnome.Loupe
-      - scope: user # Also add Flathub user repo, but no user packages
+        repo:
+          title: Flathub (system)
+        install:
+          - com.brave.Browser
+          - com.heroicgameslauncher.hgl
+          - net.lutris.Lutris
+          - com.discordapp.Discord
+          - com.obsproject.Studio
+          - com.github.tchx84.Flatseal
+          - io.missioncenter.MissionCenter
+          - org.videolan.VLC
+          - com.vysp3r.ProtonPlus
 
-  - type: signing # this sets up the proper policy & signing files for signed images to work fully
+  # Show Antyx-OS in system information while keeping Bazzite/Fedora compatibility.
+  - type: os-release
+    properties:
+      NAME: Antyx-OS
+      PRETTY_NAME: Antyx-OS Secure Gaming
+      VARIANT: KDE NVIDIA
+      VARIANT_ID: antyx
+      HOME_URL: https://github.com/X7zvv/antyx-os
+      DOCUMENTATION_URL: https://github.com/X7zvv/antyx-os/tree/main/docs
+      SUPPORT_URL: https://github.com/X7zvv/antyx-os/issues
+      BUG_REPORT_URL: https://github.com/X7zvv/antyx-os/issues
+
+  # Installs the public cosign policy/key generated for your repository.
+  - type: signing

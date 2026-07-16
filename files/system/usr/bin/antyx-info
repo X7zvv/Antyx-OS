@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+set -u
+
+if command -v fastfetch >/dev/null 2>&1; then
+    fastfetch
+else
+    cat /etc/os-release
+    echo
+    uname -a
+fi
+
+echo
+echo "Antyx-Befehle:"
+echo "  antyx-check   Sicherheitsstatus prüfen"
+echo "  antyx-update  System und Flatpaks aktualisieren"
+echo "  antyx-info    Systeminformationen anzeigen"
