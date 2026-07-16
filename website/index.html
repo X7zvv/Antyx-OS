@@ -3,88 +3,283 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Antyx-OS Secure Gaming – ein sicheres KDE-Gaming-System auf Basis von Bazzite.">
+  <meta name="description" content="Antyx-OS – Secure. Stable. Gaming.">
+  <meta name="theme-color" content="#0b0910">
   <title>Antyx-OS — Secure. Stable. Gaming.</title>
-  <link rel="icon" href="../branding/icons/favicon-64.png">
+  <link rel="icon" href="assets/logo.svg">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="nav">
-    <a class="brand" href="#top" aria-label="Antyx-OS Startseite">
-      <img class="brand-logo" src="../branding/logo/antyx-mark.svg" alt="">
-      <span>ANTYX<span class="accent">-OS</span></span>
+  <div class="noise"></div>
+  <div class="orb orb-one"></div>
+  <div class="orb orb-two"></div>
+
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="Antyx-OS">
+      <img src="assets/logo.svg" alt="">
+      <span>ANTYX<span>-OS</span></span>
     </a>
-    <nav>
+
+    <nav class="desktop-nav">
+      <a class="active" href="#home">Start</a>
       <a href="#features">Features</a>
       <a href="#security">Sicherheit</a>
-      <a href="#status">Status</a>
+      <a href="#roadmap">Roadmap</a>
+      <a href="#download">Download</a>
     </nav>
+
+    <a class="github-button" href="https://github.com/X7zvv/Antyx-OS" target="_blank" rel="noreferrer">
+      GitHub
+      <span>↗</span>
+    </a>
+
+    <button class="menu-button" aria-label="Menü öffnen">
+      <span></span><span></span>
+    </button>
   </header>
 
-  <main id="top">
-    <section class="hero">
-      <div class="eyebrow">SECURE. STABLE. GAMING.</div>
-      <h1>Dein Gaming-System.<br><span>Unter deiner Kontrolle.</span></h1>
-      <p>
-        Antyx-OS kombiniert KDE Plasma, Bazzite-Gaming und ein signiertes
-        Atomic-System. Entwickelt für moderne NVIDIA-PCs.
-      </p>
-      <div class="actions">
-        <a class="button primary" href="#status">Projektstatus</a>
-        <a class="button secondary" href="#security">Sicherheitskonzept</a>
+  <div class="mobile-menu">
+    <a href="#home">Start</a>
+    <a href="#features">Features</a>
+    <a href="#security">Sicherheit</a>
+    <a href="#roadmap">Roadmap</a>
+    <a href="#download">Download</a>
+  </div>
+
+  <main>
+    <section class="hero section" id="home">
+      <div class="hero-copy reveal">
+        <div class="status-pill">
+          <span class="pulse"></span>
+          Antyx-OS 0.2 wird entwickelt
+        </div>
+
+        <h1>
+          Gaming ohne
+          <span class="gradient-text">unnötigen Ballast.</span>
+        </h1>
+
+        <p>
+          Ein modernes, sicheres Gaming-System auf Basis von Bazzite und Fedora Atomic.
+          Entwickelt für Leistung, Stabilität und einfache Wartung.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button primary" href="#download">
+            Antyx-OS entdecken
+            <span>→</span>
+          </a>
+          <a class="button ghost" href="#features">Mehr erfahren</a>
+        </div>
+
+        <div class="hero-meta">
+          <div><strong>Atomic</strong><span>System-Updates</span></div>
+          <div><strong>SELinux</strong><span>Enforcing</span></div>
+          <div><strong>KDE</strong><span>Plasma Desktop</span></div>
+        </div>
       </div>
-      <div class="terminal">
-        <div class="terminal-top"><i></i><i></i><i></i></div>
-        <pre><span>$</span> antyx-check
-[OK] SELinux: Enforcing
-[OK] Firewall: firewalld aktiv
-[OK] Secure Boot: aktiviert
-[OK] Signiertes Atomic-Image</pre>
+
+      <div class="dashboard-wrap reveal delay-1">
+        <div class="dashboard-glow"></div>
+        <div class="dashboard">
+          <div class="dash-top">
+            <div class="dash-title">
+              <img src="assets/logo.svg" alt="">
+              <div>
+                <strong>Antyx Control</strong>
+                <span>Systemübersicht</span>
+              </div>
+            </div>
+            <div class="dash-controls">
+              <i></i><i></i><i></i>
+            </div>
+          </div>
+
+          <div class="dash-grid">
+            <article class="system-card card-hover">
+              <div class="card-head">
+                <span>Systemstatus</span>
+                <b class="online">Sicher</b>
+              </div>
+              <div class="system-score">
+                <div class="ring">
+                  <span>98</span>
+                  <small>/ 100</small>
+                </div>
+                <div>
+                  <strong>Alles läuft sauber</strong>
+                  <p>Firewall, SELinux und Updates sind aktiv.</p>
+                </div>
+              </div>
+            </article>
+
+            <article class="small-card card-hover">
+              <span class="card-icon">⚡</span>
+              <div><small>Performance</small><strong>Gaming</strong></div>
+              <em>Aktiv</em>
+            </article>
+
+            <article class="small-card card-hover">
+              <span class="card-icon">◈</span>
+              <div><small>System</small><strong>Aktuell</strong></div>
+              <em>0 Updates</em>
+            </article>
+
+            <article class="chart-card card-hover">
+              <div class="card-head">
+                <span>Systemauslastung</span>
+                <small>Live</small>
+              </div>
+              <div class="chart">
+                <svg viewBox="0 0 600 180" preserveAspectRatio="none" aria-hidden="true">
+                  <defs>
+                    <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#a66cff" stop-opacity=".4"/>
+                      <stop offset="1" stop-color="#a66cff" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path class="area" d="M0,145 C45,140 55,105 100,115 C145,126 160,70 210,82 C260,94 280,48 330,65 C380,82 405,32 450,48 C505,68 530,18 600,35 L600,180 L0,180 Z"/>
+                  <path class="line" d="M0,145 C45,140 55,105 100,115 C145,126 160,70 210,82 C260,94 280,48 330,65 C380,82 405,32 450,48 C505,68 530,18 600,35"/>
+                </svg>
+                <div class="chart-labels"><span>CPU 18%</span><span>GPU 42%</span><span>RAM 31%</span></div>
+              </div>
+            </article>
+
+            <article class="quick-card card-hover">
+              <div class="card-head">
+                <span>Schnellzugriff</span>
+              </div>
+              <button><span>↻</span> System aktualisieren</button>
+              <button><span>🛡</span> Sicherheitscheck</button>
+              <button><span>🎮</span> Gaming-Modus</button>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
 
-    <section id="features" class="section">
-      <div class="section-title">
-        <small>ANTYX-OS 0.1</small>
-        <h2>Alles Wichtige. Kein unnötiger Müll.</h2>
+    <section class="section feature-section" id="features">
+      <div class="section-heading reveal">
+        <div>
+          <span class="eyebrow">ANTYX-OS FEATURES</span>
+          <h2>Alles, was dein Gaming-PC wirklich braucht.</h2>
+        </div>
+        <p>Saubere Voreinstellungen, moderne Tools und keine fragwürdigen Optimierungs-Skripte.</p>
       </div>
-      <div class="grid">
-        <article><b>Gaming</b><p>Steam, Heroic, Lutris, ProtonPlus, MangoHud und Gamescope.</p></article>
-        <article><b>Desktop</b><p>KDE Plasma mit einem klaren, schnellen Workflow.</p></article>
-        <article><b>Browser</b><p>Brave ist ab dem ersten Start vorinstalliert.</p></article>
-        <article><b>Updates</b><p>Atomic-Updates mit Rückkehr zur vorherigen Version.</p></article>
+
+      <div class="feature-grid">
+        <article class="feature-card spotlight reveal">
+          <span class="feature-number">01</span>
+          <div class="feature-icon">⚡</div>
+          <h3>Gaming bereit</h3>
+          <p>Steam, Heroic, Lutris, ProtonPlus, MangoHud und Gamescope sind vorbereitet.</p>
+          <a href="#">Details <span>→</span></a>
+        </article>
+
+        <article class="feature-card spotlight reveal delay-1">
+          <span class="feature-number">02</span>
+          <div class="feature-icon">◉</div>
+          <h3>Atomic Updates</h3>
+          <p>System-Updates werden als vollständiges Image installiert und können zurückgerollt werden.</p>
+          <a href="#">Details <span>→</span></a>
+        </article>
+
+        <article class="feature-card spotlight reveal delay-2">
+          <span class="feature-number">03</span>
+          <div class="feature-icon">◇</div>
+          <h3>Eigene Identität</h3>
+          <p>Antyx-Branding, KDE-Theme, Wallpaper, Login-Screen und eigene Systemwerkzeuge.</p>
+          <a href="#">Details <span>→</span></a>
+        </article>
       </div>
     </section>
 
-    <section id="security" class="section split">
-      <div>
-        <small>SICHERHEIT</small>
-        <h2>Sicher eingestellt, ohne Gaming kaputtzumachen.</h2>
+    <section class="section security-section" id="security">
+      <div class="security-panel reveal">
+        <div class="security-copy">
+          <span class="eyebrow">SICHERHEIT OHNE THEATER</span>
+          <h2>Sicher eingestellt. Gaming bleibt funktionsfähig.</h2>
+          <p>
+            Antyx-OS nutzt die Schutzmechanismen von Fedora, statt sie für minimale
+            Benchmark-Unterschiede abzuschalten.
+          </p>
+
+          <div class="security-list">
+            <div><span>✓</span><p><strong>SELinux Enforcing</strong><small>Zugriffe werden zusätzlich kontrolliert.</small></p></div>
+            <div><span>✓</span><p><strong>Firewall aktiv</strong><small>Keine unnötig offenen Dienste.</small></p></div>
+            <div><span>✓</span><p><strong>Signierte Builds</strong><small>Updates stammen nachweisbar aus dem Antyx-Projekt.</small></p></div>
+            <div><span>✓</span><p><strong>Rollback</strong><small>Vorherige Systemversion bleibt verfügbar.</small></p></div>
+          </div>
+        </div>
+
+        <div class="security-visual">
+          <div class="shield-orbit orbit-a"></div>
+          <div class="shield-orbit orbit-b"></div>
+          <div class="shield">
+            <img src="assets/logo.svg" alt="">
+          </div>
+          <div class="float-card fc-one"><span></span> Firewall aktiv</div>
+          <div class="float-card fc-two"><span></span> Image signiert</div>
+          <div class="float-card fc-three"><span></span> SELinux aktiv</div>
+        </div>
       </div>
-      <ul>
-        <li><span>01</span> SELinux bleibt im Enforcing-Modus.</li>
-        <li><span>02</span> Firewall ist standardmäßig aktiv.</li>
-        <li><span>03</span> Builds werden mit Cosign signiert.</li>
-        <li><span>04</span> Flatpak-Sandbox für Desktop-Apps.</li>
-        <li><span>05</span> Rollback bei fehlerhaften Updates.</li>
-      </ul>
     </section>
 
-    <section id="status" class="section status">
-      <small>AKTUELLER STATUS</small>
-      <h2>Private Entwicklungsphase</h2>
-      <p>
-        Antyx-OS ist noch kein fertiges öffentliches Produkt. Zuerst werden
-        Build, NVIDIA-Treiber, Updates, Rollback und Installation getestet.
-      </p>
-      <div class="badge">VERSION 0.1 — FOUNDATION</div>
+    <section class="section roadmap-section" id="roadmap">
+      <div class="section-heading reveal">
+        <div>
+          <span class="eyebrow">ROADMAP</span>
+          <h2>Von der Grundlage zur vollständigen Distribution.</h2>
+        </div>
+      </div>
+
+      <div class="roadmap">
+        <article class="roadmap-item done reveal">
+          <span class="road-index">01</span>
+          <div><small>ABGESCHLOSSEN</small><h3>Grundsystem</h3><p>Build-System, Signierung, Apps und Sicherheitsbasis.</p></div>
+        </article>
+        <article class="roadmap-item active reveal delay-1">
+          <span class="road-index">02</span>
+          <div><small>IN ARBEIT</small><h3>Branding & Website</h3><p>Logo, KDE-Design, Login, Bootscreen und Webauftritt.</p></div>
+        </article>
+        <article class="roadmap-item reveal delay-2">
+          <span class="road-index">03</span>
+          <div><small>GEPLANT</small><h3>Antyx Hub</h3><p>Eigene System-App für Updates, Sicherheit und Gaming.</p></div>
+        </article>
+        <article class="roadmap-item reveal">
+          <span class="road-index">04</span>
+          <div><small>GEPLANT</small><h3>Öffentliche ISO</h3><p>Installer, Tests, Dokumentation und erste stabile Version.</p></div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section download-section" id="download">
+      <div class="download-card reveal">
+        <div>
+          <span class="eyebrow">ANTYX-OS 0.2</span>
+          <h2>Die erste Testversion entsteht.</h2>
+          <p>
+            Antyx-OS befindet sich noch in privater Entwicklung. Öffentliche Downloads
+            werden erst freigeschaltet, wenn Installation, Updates und Rollback getestet sind.
+          </p>
+        </div>
+        <div class="download-actions">
+          <a class="button primary" href="https://github.com/X7zvv/Antyx-OS" target="_blank" rel="noreferrer">Projekt auf GitHub <span>↗</span></a>
+          <span class="build-state"><i></i> Build-System online</span>
+        </div>
+      </div>
     </section>
   </main>
 
   <footer>
-    <span>© <span id="year"></span> Antyx-OS</span>
-    <span>Community-Projekt auf Basis von Bazzite und Fedora. Keine offizielle Verbindung.</span>
+    <div class="footer-brand">
+      <img src="assets/logo.svg" alt="">
+      <div><strong>ANTYX-OS</strong><span>Secure. Stable. Gaming.</span></div>
+    </div>
+    <p>Community-Projekt auf Basis von Bazzite und Fedora. Keine offizielle Verbindung.</p>
+    <span>© <b id="year"></b> Antyx-OS</span>
   </footer>
+
   <script src="app.js"></script>
 </body>
 </html>
