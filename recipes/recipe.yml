@@ -9,21 +9,22 @@ base-image: ghcr.io/ublue-os/bazzite-nvidia-open
 image-version: stable
 
 modules:
-  # Install Antyx Hub as a native package.
-  - type: script
-    snippets:
-      - |
-        set -eu
-        HUB_RPM="/ctx/packages/antyx-hub/antyx-hub-0.1.0-1.x86_64.rpm"
-        test -f "$HUB_RPM"
-        dnf5 install -y "$HUB_RPM"
-        test -x /usr/bin/antyx-hub
-
-  # Copy Antyx branding, desktop integration and security defaults.
+  # Copy the repository files into the image first.
   - type: files
     files:
       - source: system
         destination: /
+
+  # Install Antyx Hub from the RPM copied into /usr/share/antyx/packages.
+  - type: script
+    snippets:
+      - |
+        set -eux
+        HUB_RPM="/usr/share/antyx/packages/antyx-hub-0.1.0-1.x86_64.rpm"
+
+        test -f "$HUB_RPM"
+        dnf5 install -y "$HUB_RPM"
+        test -x /usr/bin/antyx-hub
 
   # Apply Antyx integration after all files are present.
   - type: script
