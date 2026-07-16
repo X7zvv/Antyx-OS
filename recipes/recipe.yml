@@ -47,4 +47,6 @@ modules:
       BUG_REPORT_URL: https://github.com/DEIN_GITHUB_NAME/antyx-os/issues
 
   # Installs the public cosign policy/key generated for your repository.
-  - type: signing
+  -   - type: script
+    scripts:
+      - install-antyx-hub.shtype: signing
