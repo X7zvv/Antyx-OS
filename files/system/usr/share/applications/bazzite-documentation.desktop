@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Legacy Documentation Entry
+Exec=true
+Icon=antyx-os
+Terminal=false
+NoDisplay=true
+Categories=Documentation;System;

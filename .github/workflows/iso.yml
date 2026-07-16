@@ -14,10 +14,11 @@ permissions:
 
 jobs:
   build-iso:
-    if: >
+    if: >-
       github.event_name == 'workflow_dispatch' ||
-      github.event.workflow_run.conclusion == 'success'
-
+      (github.event_name == 'workflow_run' &&
+       github.event.workflow_run.conclusion == 'success' &&
+       github.event.workflow_run.head_branch == 'main')
     runs-on: ubuntu-latest
 
     steps:
@@ -51,18 +52,22 @@ jobs:
       - name: Build ISO
         run: |
           sudo bluebuild generate-iso \
-            --iso-name Antyx-OS-0.3-alpha.iso \
+            --iso-name Antyx-OS-0.4-alpha.iso \
             image ghcr.io/x7zvv/antyx-os:latest
 
-      - name: Find ISO
+      - name: Generate SHA256 checksum
         run: |
-          find . -type f -name "*.iso" -ls
+          ISO="$(find . -type f -name 'Antyx-OS-0.4-alpha.iso' -print -quit)"
+          test -n "$ISO"
+          sha256sum "$ISO" > "${ISO}.sha256"
+          ls -lh "$ISO" "${ISO}.sha256"
 
       - name: Upload ISO
         uses: actions/upload-artifact@v4
         with:
-          name: Antyx-OS-0.3-alpha
+          name: Antyx-OS-0.4-alpha
           path: |
-            **/*.iso
+            **/Antyx-OS-0.4-alpha.iso
+            **/Antyx-OS-0.4-alpha.iso.sha256
           if-no-files-found: error
-          retention-days: 14
+          retention-days: 30

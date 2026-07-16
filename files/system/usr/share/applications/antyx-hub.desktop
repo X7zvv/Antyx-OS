@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Antyx Hub
+Comment=Antyx-OS system, security and gaming center
+Exec=env WEBKIT_DISABLE_DMABUF_RENDERER=1 antyx-hub
+Icon=antyx-os
+Terminal=false
+Categories=System;Settings;
+StartupNotify=true

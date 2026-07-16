@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+set -e
+exec /usr/libexec/fastfetch.real --config /usr/share/fastfetch/presets/antyx.jsonc "$@"

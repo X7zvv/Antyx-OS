@@ -1,20 +1,31 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-MARKER="${HOME}/.config/antyx/branding-applied"
+MARKER="${HOME}/.config/antyx/branding-applied-v04"
 mkdir -p "$(dirname "$MARKER")"
 [[ -f "$MARKER" ]] && exit 0
+
+WALL="/usr/share/backgrounds/antyx/antyx-default.png"
+[[ -f "$WALL" ]] || WALL="/usr/share/backgrounds/antyx/antyx-default.svg"
 
 if command -v plasma-apply-colorscheme >/dev/null 2>&1; then
   plasma-apply-colorscheme Antyx || true
 fi
 
-WALL="/usr/share/backgrounds/antyx/antyx-default.png"
-[[ -f "$WALL" ]] || WALL="/usr/share/backgrounds/antyx/antyx-default.svg"
+if command -v kwriteconfig6 >/dev/null 2>&1; then
+  kwriteconfig6 --file kdeglobals --group General --key ColorScheme Antyx || true
+  kwriteconfig6 --file kscreenlockerrc --group Greeter --key WallpaperPlugin org.kde.image || true
+  kwriteconfig6 --file kscreenlockerrc --group Greeter --group Wallpaper --group org.kde.image --group General --key Image "file://${WALL}" || true
+fi
 
 if command -v qdbus6 >/dev/null 2>&1; then
-  SCRIPT="var allDesktops = desktops(); for (i=0;i<allDesktops.length;i++){d=allDesktops[i];d.wallpaperPlugin='org.kde.image';d.currentConfigGroup=['Wallpaper','org.kde.image','General'];d.writeConfig('Image','file://${WALL}');}"
-  qdbus6 org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "$SCRIPT" || true
+  SCRIPT="var ds=desktops(); for (var i=0;i<ds.length;i++){var d=ds[i];d.wallpaperPlugin='org.kde.image';d.currentConfigGroup=['Wallpaper','org.kde.image','General'];d.writeConfig('Image','file://${WALL}');}"
+  for _ in $(seq 1 30); do
+    if qdbus6 org.kde.plasmashell /PlasmaShell org.kde.PlasmaShell.evaluateScript "$SCRIPT" >/dev/null 2>&1; then
+      break
+    fi
+    sleep 1
+  done
 fi
 
 touch "$MARKER"

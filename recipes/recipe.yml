@@ -2,21 +2,73 @@
 # yaml-language-server: $schema=https://schema.blue-build.org/recipe-v1.json
 
 name: antyx-os
-description: Antyx-OS Secure Gaming – a security-conscious KDE gaming image based on Bazzite.
+description: Antyx-OS Secure Gaming - a clean, security-conscious KDE gaming image.
 
-# RTX 50-series / modern NVIDIA GPUs.
+# Stable NVIDIA-open gaming base for modern NVIDIA GPUs.
 base-image: ghcr.io/ublue-os/bazzite-nvidia-open
 image-version: stable
 
 modules:
-  # Antyx commands and balanced security defaults.
+  # Install the native Antyx Hub RPM and verify that Steam is provided by the base.
+  - type: script
+    snippets:
+      - |
+        set -eu
+        HUB_RPM="/ctx/packages/antyx-hub/antyx-hub-0.1.0-1.x86_64.rpm"
+        test -f "$HUB_RPM"
+        dnf5 install -y "$HUB_RPM"
+        test -x /usr/bin/antyx-hub
+        command -v steam >/dev/null 2>&1
+
+  # Copy Antyx branding, desktop integration and security defaults into the image.
   - type: files
     files:
       - source: system
         destination: /
 
-  # Desktop applications installed from Flathub.
-  # Steam, MangoHud, Gamescope and core gaming components come from Bazzite.
+  # Apply branding after the files are copied and hide remaining user-facing Bazzite launchers.
+  - type: script
+    snippets:
+      - |
+        set -eu
+        chmod 0755 /usr/libexec/antyx-first-login
+        chmod 0755 /usr/libexec/antyx-fastfetch
+        chmod 0755 /usr/bin/antyx-verify
+
+        # Force the Antyx Fastfetch preset instead of the base image preset.
+        if [ -x /usr/bin/fastfetch ] && [ ! -e /usr/libexec/fastfetch.real ]; then
+          mv /usr/bin/fastfetch /usr/libexec/fastfetch.real
+        fi
+        ln -sfn /usr/libexec/antyx-fastfetch /usr/bin/fastfetch
+
+        # Keep the hardware setup logic, but remove its visible Bazzite wording.
+        if [ -f /usr/libexec/bazzite-hardware-setup ]; then
+          sed -i 's/Preparing System - Please wait, this may take a while/Preparing Antyx-OS - Please wait, this may take a while/g' /usr/libexec/bazzite-hardware-setup
+          sed -i 's/hostnamectl set-hostname bazzite/hostnamectl set-hostname antyx-os/g' /usr/libexec/bazzite-hardware-setup
+        fi
+
+        # Hide any remaining Bazzite-branded menu launchers. Antyx replacements are copied above.
+        for desktop in /usr/share/applications/*.desktop; do
+          [ -f "$desktop" ] || continue
+          case "$(basename "$desktop")" in
+            antyx-*.desktop)
+              continue
+              ;;
+          esac
+          if grep -qi 'bazzite' "$desktop" && ! grep -q '^NoDisplay=true$' "$desktop"; then
+            printf '\nNoDisplay=true\n' >> "$desktop"
+          fi
+        done
+
+        # Remove Bazzite wallpaper choices while leaving functional upstream components intact.
+        find /usr/share/backgrounds /usr/share/wallpapers \
+          -maxdepth 4 -type f -iname '*bazzite*' -delete 2>/dev/null || true
+
+        plymouth-set-default-theme antyx
+        update-desktop-database /usr/share/applications || true
+
+  # User applications. Native Steam is already part of the gaming base.
+  # These system Flatpaks are installed automatically for all users on first boot.
   - type: default-flatpaks
     configurations:
       - notify: true
@@ -25,28 +77,35 @@ modules:
           title: Flathub (system)
         install:
           - com.brave.Browser
+          - com.modrinth.ModrinthApp
+          - com.discordapp.Discord
+          - com.spotify.Client
           - com.heroicgameslauncher.hgl
           - net.lutris.Lutris
-          - com.discordapp.Discord
           - com.obsproject.Studio
           - com.github.tchx84.Flatseal
           - io.missioncenter.MissionCenter
           - org.videolan.VLC
           - com.vysp3r.ProtonPlus
 
-  # Show Antyx-OS in system information while keeping Bazzite/Fedora compatibility.
+  # Set Antyx identity after package operations to keep Fedora compatibility.
   - type: os-release
     properties:
+      ID: antyx
+      ID_LIKE: fedora
       NAME: Antyx-OS
       PRETTY_NAME: Antyx-OS Secure Gaming
       VARIANT: KDE NVIDIA
       VARIANT_ID: antyx
-      HOME_URL: https://github.com/DEIN_GITHUB_NAME/antyx-os
-      DOCUMENTATION_URL: https://github.com/DEIN_GITHUB_NAME/antyx-os/tree/main/docs
-      SUPPORT_URL: https://github.com/DEIN_GITHUB_NAME/antyx-os/issues
-      BUG_REPORT_URL: https://github.com/DEIN_GITHUB_NAME/antyx-os/issues
+      LOGO: antyx-os
+      ANSI_COLOR: "0;38;2;149;85;255"
+      HOME_URL: https://antyx-os.netlify.app
+      DOCUMENTATION_URL: https://github.com/X7zvv/Antyx-OS/tree/main/docs
+      SUPPORT_URL: https://github.com/X7zvv/Antyx-OS/issues
+      BUG_REPORT_URL: https://github.com/X7zvv/Antyx-OS/issues
 
-  # Installs the public cosign policy/key generated for your repository.
-  -   - type: script
-    scripts:
-      - install-antyx-hub.shtype: signing
+  # Plymouth changes only become visible after the system initramfs is regenerated.
+  - type: initramfs
+
+  # Install the public cosign policy/key generated for the repository.
+  - type: signing

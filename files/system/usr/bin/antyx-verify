@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+set -uo pipefail
+
+PASS=0
+WARN=0
+FAIL=0
+
+ok()   { printf '  [OK]   %s\n' "$1"; PASS=$((PASS + 1)); }
+warn() { printf '  [WARN] %s\n' "$1"; WARN=$((WARN + 1)); }
+fail() { printf '  [FAIL] %s\n' "$1"; FAIL=$((FAIL + 1)); }
+
+printf '\nAntyx-OS 0.4 verification\n\n'
+
+grep -q '^ID=antyx$' /etc/os-release 2>/dev/null && ok 'Antyx OS identity' || fail 'Antyx OS identity'
+command -v steam >/dev/null 2>&1 && ok 'Steam installed' || fail 'Steam missing'
+command -v antyx-hub >/dev/null 2>&1 && ok 'Antyx Hub installed' || fail 'Antyx Hub missing'
+[[ "$(plymouth-set-default-theme 2>/dev/null)" == 'antyx' ]] && ok 'Antyx Plymouth active' || warn 'Antyx Plymouth not active'
+grep -q '^Current=antyx$' /etc/sddm.conf.d/99-antyx-theme.conf 2>/dev/null && ok 'Antyx SDDM configured' || fail 'Antyx SDDM configuration missing'
+[[ -x /usr/libexec/antyx-fastfetch ]] && ok 'Antyx Fastfetch wrapper' || fail 'Antyx Fastfetch wrapper missing'
+
+for app in \
+  com.brave.Browser \
+  com.modrinth.ModrinthApp \
+  com.discordapp.Discord \
+  com.spotify.Client; do
+  if flatpak --system info "$app" >/dev/null 2>&1; then
+    ok "$app installed"
+  else
+    warn "$app is still pending first-boot installation"
+  fi
+done
+
+VISIBLE_BAZZITE=0
+for desktop in /usr/share/applications/*.desktop; do
+  [[ -f "$desktop" ]] || continue
+  if grep -qi 'bazzite' "$desktop" && ! grep -q '^NoDisplay=true$' "$desktop"; then
+    printf '  [FAIL] Visible Bazzite launcher: %s\n' "$desktop"
+    VISIBLE_BAZZITE=1
+    FAIL=$((FAIL + 1))
+  fi
+done
+[[ "$VISIBLE_BAZZITE" -eq 0 ]] && ok 'No visible Bazzite launchers'
+
+printf '\nResult: %d OK, %d warnings, %d failures\n' "$PASS" "$WARN" "$FAIL"
+[[ "$FAIL" -eq 0 ]]

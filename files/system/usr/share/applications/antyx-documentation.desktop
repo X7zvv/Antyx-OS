@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Antyx-OS Documentation
+Comment=Open the Antyx-OS documentation
+Exec=xdg-open https://github.com/X7zvv/Antyx-OS/tree/main/docs
+Icon=antyx-os
+Terminal=false
+Categories=Documentation;System;
+Keywords=antyx;docs;manual;guide;help;tutorial;
