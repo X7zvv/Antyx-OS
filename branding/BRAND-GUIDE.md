@@ -1,37 +1,34 @@
 # Antyx-OS Brand Guide
 
-## Kernidee
+## Brand idea
 
-Antyx-OS steht für ein schnelles, stabiles und sicherheitsbewusstes Gaming-System.
+Antyx-OS represents a fast, stable, and security-conscious gaming operating system.
 
-## Logo
-
-Das Zeichen kombiniert:
+## Logo meaning
 
 - **A:** Antyx-OS
-- **gebrochener Kreis:** Schutz, Systemkontrolle und kontinuierliche Entwicklung
-- **violette Bewegungslinie:** Leistung, Fortschritt und Gaming
+- **Broken circle:** protection, system control, and continuous development
+- **Purple motion line:** performance, progress, and gaming
 
-## Farben
+## Colors
 
-| Rolle | Farbe |
+| Role | Color |
 |---|---|
-| Primärviolett | `#9555FF` |
-| Tiefes Violett | `#6524D6` |
-| Helles Violett | `#C39BFF` |
-| Weiß | `#FFFFFF` |
-| Dunkler Hintergrund | `#08060D` |
-| Sekundärtext | `#B9A9D5` |
+| Primary purple | `#9555FF` |
+| Deep purple | `#6524D6` |
+| Light purple | `#C39BFF` |
+| White | `#FFFFFF` |
+| Dark background | `#08060D` |
+| Secondary text | `#B9A9D5` |
 
-## Slogan
+## Tagline
 
 **Secure. Stable. Gaming.**
 
-## Regeln
+## Rules
 
-- Das Logo nicht verzerren.
-- Keine zusätzlichen Farben ohne Grund.
-- Auf dunklem Hintergrund die weiße Version nutzen.
-- Auf hellem Hintergrund die schwarze/weiße Kontrastversion nutzen.
-- Mindestens die Breite eines Viertels des Logos als Abstand lassen.
-- Das Konzeptbild ist nur Präsentation; für echte Nutzung immer SVG/PNG aus `branding/logo` verwenden.
+- Do not distort the logo.
+- Do not introduce unrelated colors.
+- Use the white logo on dark backgrounds.
+- Keep sufficient spacing around the mark.
+- Use the SVG and PNG files from `branding/logo` for production use.

@@ -1,71 +1,24 @@
 # Antyx-OS
 
-**Antyx-OS Secure Gaming** ist ein eigenes, signiertes Gaming-System auf Basis von Bazzite und Fedora Atomic.
+**Antyx-OS Secure Gaming** is a custom, signed gaming operating system based on Bazzite and Fedora Atomic.
 
-## Ziel der ersten Version
+## Goals
 
 - KDE Plasma
-- moderne NVIDIA-Grafikkarten, einschließlich RTX 50-Serie
-- Brave Browser vorinstalliert
-- Steam und Gaming-Komponenten aus Bazzite
-- Heroic, Lutris, ProtonPlus, Discord, OBS, Flatseal, Mission Center und VLC
-- SELinux und Firewall bleiben aktiv
-- Atomic Updates und Rollback
-- ausgewogene Sicherheitsregeln ohne aggressive Gaming-Probleme
+- modern NVIDIA GPU support
+- Brave Browser preinstalled
+- Steam and core gaming components from Bazzite
+- Heroic, Lutris, ProtonPlus, Discord, OBS, Flatseal, Mission Center, and VLC
+- SELinux and firewall remain enabled
+- atomic updates and rollback
+- balanced security defaults without breaking gaming compatibility
+- consistent English user interface and documentation
 
-## Wichtig
+## Project status
 
-Antyx-OS ist in dieser Phase ein privates Testprojekt. Veröffentliche keine ISO als „sicher“ oder „fertig“, bevor Builds, Updates, Installation und Rollback mehrfach getestet wurden.
+Antyx-OS is currently a private development project. Do not present builds as stable or production-ready before installation, updates, rollback, hardware support, and recovery have been thoroughly tested.
 
-## Repository einrichten
-
-1. Öffne den BlueBuild Workshop.
-2. Melde dich mit GitHub an.
-3. Erstelle ein Repository namens `antyx-os`.
-4. Wähle die automatische Einrichtung der Container-Signierung.
-5. Lass die vom Workshop erstellte Datei `cosign.pub` im Repository.
-6. Kopiere danach die Dateien aus diesem Starterprojekt in das Repository.
-7. Ersetze überall `DEIN_GITHUB_NAME` mit deinem echten GitHub-Namen.
-8. Committe und pushe die Dateien.
-9. Öffne auf GitHub den Reiter **Actions** und starte **Build Antyx-OS**.
-
-## Installation auf einem bestehenden Bazzite-System
-
-Ersetze `DEIN_GITHUB_NAME`:
-
-```bash
-sudo rpm-ostree rebase \
-  ostree-unverified-registry:ghcr.io/DEIN_GITHUB_NAME/antyx-os:latest
-
-systemctl reboot
-```
-
-Nach dem ersten erfolgreichen Start auf das signierte Image wechseln:
-
-```bash
-sudo rpm-ostree rebase \
-  ostree-image-signed:docker://ghcr.io/DEIN_GITHUB_NAME/antyx-os:latest
-
-systemctl reboot
-```
-
-## Rückkehr zu normalem Bazzite
-
-```bash
-sudo rpm-ostree rebase \
-  ostree-image-signed:docker://ghcr.io/ublue-os/bazzite-nvidia-open:stable
-
-systemctl reboot
-```
-
-Bei einem fehlgeschlagenen Update kannst du im Bootmenü das vorherige Deployment starten oder Folgendes verwenden:
-
-```bash
-sudo rpm-ostree rollback
-systemctl reboot
-```
-
-## Eigene Befehle
+## Custom commands
 
 ```bash
 antyx-check
@@ -73,20 +26,17 @@ antyx-update
 antyx-info
 ```
 
-## Projektstatus
+## Roadmap
 
-- [x] Technische Grundstruktur
-- [x] Automatischer Image-Build
-- [x] Brave und Gaming-Apps
-- [x] Ausgewogene Sicherheitsbasis
-- [x] Erste Website
-- [x] Eigenes Logo
-- [x] Wallpaper und KDE-Branding
-- [ ] Eigene Secure-Boot-Schlüssel
-- [ ] Installierbare ISO
-- [ ] Antyx-Hub
-
-
-## Branding
-
-Siehe [`docs/BRANDING.md`](docs/BRANDING.md) und [`branding/BRAND-GUIDE.md`](branding/BRAND-GUIDE.md).
+- [x] Build system
+- [x] Image signing
+- [x] Base applications
+- [x] Security defaults
+- [x] Logo and visual identity
+- [x] KDE colors and wallpaper
+- [x] Login theme
+- [x] English website
+- [ ] Antyx Hub
+- [ ] Installer branding
+- [ ] Public test ISO
+- [ ] Stable 1.0 release

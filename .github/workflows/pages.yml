@@ -27,17 +27,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Repository laden
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: GitHub Pages einrichten
+      - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
-      - name: Website hochladen
+      - name: Upload website artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: website
 
-      - name: Website veröffentlichen
+      - name: Deploy website
         id: deployment
         uses: actions/deploy-pages@v4

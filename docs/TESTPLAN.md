@@ -1,40 +1,39 @@
-# Testplan für Antyx-OS 0.1
+# Antyx-OS Test Plan
 
 ## Build
 
-- GitHub Action läuft ohne Fehler.
-- Das Image wird unter GHCR veröffentlicht.
-- Die Cosign-Signatur lässt sich prüfen.
+- GitHub Actions completes successfully.
+- The image is published to GHCR.
+- The image signature can be verified.
 
-## Start
+## Boot and hardware
 
-- Das System bootet.
-- KDE-Anmeldung funktioniert.
-- NVIDIA-Treiber werden mit `nvidia-smi` erkannt.
-- Beide Monitore funktionieren.
-- Audio, WLAN/LAN, Bluetooth, Tastatur und Maus funktionieren.
+- The system boots successfully.
+- KDE login works.
+- NVIDIA is detected with `nvidia-smi`.
+- Displays, audio, network, Bluetooth, keyboard, and mouse work.
 
 ## Gaming
 
-- Steam startet.
-- Ein natives Spiel startet.
-- Ein Proton-Spiel startet.
-- MangoHud funktioniert.
-- Controller wird erkannt.
-- Heroic und Lutris starten.
+- Steam launches.
+- A native Linux game launches.
+- A Proton game launches.
+- MangoHud works.
+- Controllers are detected.
+- Heroic and Lutris launch.
 
-## Sicherheit
+## Security
 
-- `getenforce` zeigt `Enforcing`.
-- `systemctl is-active firewalld` zeigt `active`.
-- Secure Boot bleibt aktiv.
-- SSH ist nicht unbeabsichtigt aktiviert.
-- Updates stammen aus dem eigenen signierten Image.
-- Rollback auf das vorherige Deployment funktioniert.
+- `getenforce` returns `Enforcing`.
+- `systemctl is-active firewalld` returns `active`.
+- Secure Boot remains enabled.
+- SSH is not unintentionally enabled.
+- Signed image updates work.
+- Rollback works.
 
-## Apps
+## Applications
 
-- Brave startet.
-- Discord startet.
-- OBS startet.
-- Flatseal zeigt die Flatpak-Berechtigungen.
+- Brave launches.
+- Discord launches.
+- OBS launches.
+- Flatseal displays Flatpak permissions.

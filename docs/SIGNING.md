@@ -1,20 +1,20 @@
-# Signierung verständlich erklärt
+# Image Signing
 
-Der BlueBuild Workshop erzeugt ein Schlüsselpaar:
+BlueBuild uses two keys:
 
-- `cosign.pub`: öffentlicher Schlüssel. Er liegt sichtbar im Repository.
-- privater Schlüssel: liegt verschlüsselt als GitHub-Secret `SIGNING_SECRET`.
+- `cosign.pub`: public verification key stored in the repository
+- private signing key: stored only as the GitHub secret `SIGNING_SECRET`
 
-GitHub Actions verwendet den privaten Schlüssel, um jedes gebaute Antyx-OS-Image zu signieren. Das installierte System verwendet den öffentlichen Schlüssel, um zu prüfen, ob das Image wirklich aus deinem Repository stammt und unverändert ist.
+GitHub Actions uses the private key to sign every Antyx-OS image. Installed systems use the public key to verify that updates were produced by the expected repository and were not modified.
 
-## Niemals tun
+## Never
 
-- privaten Schlüssel in Dateien speichern, die zu GitHub gepusht werden
-- privaten Schlüssel verschicken
-- privaten Schlüssel in Screenshots zeigen
-- das Secret in Workflow-Ausgaben ausgeben
-- fremde Personen als Repository-Admin hinzufügen, denen du nicht vollständig vertraust
+- commit the private key
+- send the private key to anyone
+- show it in screenshots
+- print it in workflow logs
+- grant repository administrator access to untrusted people
 
-## Verlust
+## Key loss
 
-Geht der private Schlüssel verloren, kann er nicht wiederhergestellt werden. Dann muss ein neues Schlüsselpaar erstellt und die Vertrauenskette sauber umgestellt werden.
+A lost private key cannot be recovered. A new key pair and a controlled trust migration would be required.

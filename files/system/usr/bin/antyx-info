@@ -10,7 +10,7 @@ else
 fi
 
 echo
-echo "Antyx-Befehle:"
-echo "  antyx-check   Sicherheitsstatus prüfen"
-echo "  antyx-update  System und Flatpaks aktualisieren"
-echo "  antyx-info    Systeminformationen anzeigen"
+echo "Antyx commands:"
+echo "  antyx-check   Check system security status"
+echo "  antyx-update  Update the system and Flatpaks"
+echo "  antyx-info    Show system information"

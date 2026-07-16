@@ -1,20 +1,16 @@
 # Security Policy
 
-## Grundregeln
+## Core rules
 
-- Der private Cosign-Schlüssel darf niemals im Repository, in einer ZIP-Datei, in einem Screenshot oder in einem Chat veröffentlicht werden.
-- Der Schlüssel gehört ausschließlich in das GitHub-Secret `SIGNING_SECRET`.
-- `cosign.pub` ist öffentlich und darf im Repository liegen.
-- SELinux darf nicht deaktiviert werden.
-- Die Firewall darf nicht dauerhaft deaktiviert werden.
-- Neue Pakete, Flatpaks und Skripte müssen vor Aufnahme geprüft werden.
-- Builds müssen aus nachvollziehbarem Quellcode entstehen.
-- Keine fremden „FPS Boost“-Skripte ohne vollständige Prüfung übernehmen.
+- Never store the private signing key in the repository, ZIP archives, screenshots, or chat messages.
+- The private key belongs only in the GitHub secret named `SIGNING_SECRET`.
+- The public `cosign.pub` file may remain in the repository.
+- SELinux must remain enabled.
+- The firewall must not be permanently disabled.
+- New packages, Flatpaks, scripts, and repositories must be reviewed before inclusion.
+- Builds must remain reproducible and traceable.
+- Do not include unknown performance scripts without reviewing every command.
 
-## Sicherheitslücken melden
+## Honest limitation
 
-Bis eine eigene Kontaktadresse existiert, Sicherheitsprobleme nicht öffentlich mit sensiblen Details posten. Nutze zunächst eine private Kontaktmöglichkeit des Projektbetreibers.
-
-## Ehrliche Grenze
-
-Eine eigene Distribution ist nicht automatisch sicherer als Bazzite. Antyx-OS bleibt nur sicher, wenn Updates regelmäßig gebaut, getestet und installiert werden und der Signierschlüssel geschützt bleibt.
+A custom distribution is not automatically safer than Bazzite. Antyx-OS only remains secure when updates are built, tested, signed, and installed regularly, and when the signing key remains protected.

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-echo "Antyx-OS wird aktualisiert."
+echo "Updating Antyx-OS."
 
 if command -v ujust >/dev/null 2>&1; then
     ujust update
@@ -11,4 +11,4 @@ else
 fi
 
 echo
-echo "Fertig. Falls ein neues System-Image installiert wurde, starte den PC neu."
+echo "Done. Restart the system if a new system image was installed."

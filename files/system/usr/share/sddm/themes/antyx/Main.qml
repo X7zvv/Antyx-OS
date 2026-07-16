@@ -53,7 +53,7 @@ Rectangle {
             id: username
             width: parent.width
             height: 58
-            placeholderText: "Benutzername"
+            placeholderText: "Username"
             text: userModel.lastUser
             color: "#ffffff"
             placeholderTextColor: "#9d91af"
@@ -70,7 +70,7 @@ Rectangle {
             id: password
             width: parent.width
             height: 58
-            placeholderText: "Passwort"
+            placeholderText: "Password"
             echoMode: TextInput.Password
             color: "#ffffff"
             placeholderTextColor: "#9d91af"
@@ -94,7 +94,7 @@ Rectangle {
         Button {
             width: parent.width
             height: 58
-            text: "ANMELDEN"
+            text: "SIGN IN"
             onClicked: sddm.login(username.text, password.text, session.index)
             background: Rectangle {
                 radius: 10

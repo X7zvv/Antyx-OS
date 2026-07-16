@@ -1,22 +1,20 @@
-# Antyx-OS: erster gemeinsamer Schritt
+# Antyx-OS Development Start
 
-## Was du jetzt machst
+## Current workflow
 
-1. Erstelle über den BlueBuild Workshop das Repository `antyx-os`.
-2. Aktiviere dort die automatische Signierung.
-3. Lade dieses Starterprojekt herunter und entpacke es.
-4. Kopiere den Inhalt in das neue GitHub-Repository.
-5. Lösche die vom Workshop erstellte `cosign.pub` nicht.
-6. Ersetze `DEIN_GITHUB_NAME` im gesamten Projekt.
-7. Starte den Build über GitHub Actions.
+1. Make changes inside the local `Antyx-OS` repository.
+2. Review the changed files.
+3. Commit and push to `main`.
+4. Watch the BlueBuild workflow.
+5. Watch the website deployment workflow when website files changed.
+6. Test the new image before public release.
 
-## Was danach geprüft wird
+## Required checks
 
-- Ist der Build grün?
-- Existiert das Paket unter `ghcr.io/DEIN_GITHUB_NAME/antyx-os`?
-- Startet Brave nach der ersten Anmeldung?
-- Funktionieren Steam, NVIDIA und MangoHud?
-- Zeigt `antyx-check` SELinux und Firewall korrekt an?
-- Funktioniert ein Rollback?
-
-Erst danach bauen wir Logo, Wallpaper, KDE-Theme und ISO.
+- Build completed successfully
+- image published
+- image signed
+- website deployed
+- system boots
+- rollback works
+- security status is correct

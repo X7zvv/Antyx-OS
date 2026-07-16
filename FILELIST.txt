@@ -1,5 +1,6 @@
 .github/dependabot.yml
 .github/workflows/build.yml
+.github/workflows/pages.yml
 .gitignore
 FILELIST.txt
 LICENSE
@@ -45,5 +46,7 @@ files/system/usr/share/sddm/themes/antyx/theme.conf
 recipes/recipe.yml
 website/README.md
 website/app.js
+website/assets/logo.svg
+website/assets/wallpaper.png
 website/index.html
 website/style.css

@@ -8,43 +8,43 @@ reset="\033[0m"
 
 ok()   { printf "${green}[OK]${reset} %s\n" "$1"; }
 warn() { printf "${yellow}[INFO]${reset} %s\n" "$1"; }
-bad()  { printf "${red}[WARNUNG]${reset} %s\n" "$1"; }
+bad()  { printf "${red}[WARNING]${reset} %s\n" "$1"; }
 
-echo "Antyx-OS Sicherheitscheck"
-echo "========================="
+echo "Antyx-OS Security Check"
+echo "======================="
 
 if command -v getenforce >/dev/null 2>&1; then
     mode="$(getenforce)"
     if [[ "$mode" == "Enforcing" ]]; then ok "SELinux: Enforcing"; else bad "SELinux: $mode"; fi
 else
-    bad "SELinux-Status konnte nicht gelesen werden."
+    bad "Unable to read SELinux status."
 fi
 
 if systemctl is-active --quiet firewalld 2>/dev/null; then
-    ok "Firewall: firewalld aktiv"
+    ok "Firewall: firewalld active"
 else
-    bad "Firewall ist nicht aktiv."
+    bad "Firewall is not active."
 fi
 
 if command -v mokutil >/dev/null 2>&1; then
     sb="$(mokutil --sb-state 2>/dev/null || true)"
-    if grep -qi "enabled" <<<"$sb"; then ok "Secure Boot: aktiviert"; else warn "Secure Boot: ${sb:-unbekannt}"; fi
+    if grep -qi "enabled" <<<"$sb"; then ok "Secure Boot: enabled"; else warn "Secure Boot: ${sb:-unknown}"; fi
 else
-    warn "mokutil nicht verfügbar; Secure-Boot-Status nicht geprüft."
+    warn "mokutil is unavailable; Secure Boot status was not checked."
 fi
 
 if findmnt -no SOURCE / 2>/dev/null | grep -qE 'crypt|mapper'; then
-    ok "Systemlaufwerk scheint verschlüsselt zu sein."
+    ok "The system drive appears to be encrypted."
 else
-    warn "Verschlüsselung konnte nicht eindeutig erkannt werden."
+    warn "Disk encryption could not be confirmed."
 fi
 
 if systemctl is-enabled --quiet sshd 2>/dev/null; then
-    warn "SSH-Server ist aktiviert. Nur eingeschaltet lassen, wenn du ihn brauchst."
+    warn "The SSH server is enabled. Leave it enabled only when required."
 else
-    ok "SSH-Server ist standardmäßig nicht aktiviert."
+    ok "The SSH server is not enabled by default."
 fi
 
 echo
-echo "System-Image:"
+echo "System image:"
 rpm-ostree status 2>/dev/null | sed -n '1,12p' || true

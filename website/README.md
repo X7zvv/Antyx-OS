@@ -1,63 +1,31 @@
 # Antyx-OS Website v1
 
-Eigenständige, responsive Website im cleanen Dashboard-Stil mit weiß-lila Antyx-Branding.
+An independent, responsive Antyx-OS website with a clean dashboard style and white-purple branding.
 
-## Enthalten
+## Included
 
-- moderne Startseite
-- animiertes Dashboard-Mockup
-- Hover-Spotlight auf Feature-Karten
-- Scroll-Reveal-Effekte
-- responsive mobile Navigation
-- Features, Sicherheit, Roadmap und Download-Bereich
-- keine Frameworks und keine externen Abhängigkeiten
-- GitHub-Pages-kompatibel
+- modern landing page
+- animated dashboard mockup
+- hover spotlight effects
+- scroll reveal animations
+- responsive mobile navigation
+- features, security, roadmap, and download sections
+- no frameworks or external dependencies
+- compatible with GitHub Pages
 
-## Lokal testen
+## Test locally
 
 ```bash
-cd Antyx-OS-Website-v1
+cd website
 python3 -m http.server 8080
 ```
 
-Dann im Browser öffnen:
+Open:
 
 ```text
 http://localhost:8080
 ```
 
-## In dein Antyx-OS-Repository übernehmen
+## Publishing
 
-Den Inhalt dieses Ordners nach `website/` kopieren:
-
-```bash
-rm -rf ~/Downloads/Antyx-OS/website
-cp -a ~/Downloads/Antyx-OS-Website-v1 ~/Downloads/Antyx-OS/website
-
-cd ~/Downloads/Antyx-OS
-git add website
-git commit -m "feat: redesign Antyx-OS website"
-git push origin main
-```
-
-## GitHub Pages aktivieren
-
-Im Repository:
-
-1. **Settings**
-2. **Pages**
-3. Unter **Build and deployment**: `Deploy from a branch`
-4. Branch: `main`
-5. Ordner: `/website` wird von GitHub Pages nicht direkt unterstützt.
-
-Am saubersten wird die Website später über einen eigenen GitHub-Pages-Workflow bereitgestellt. Alternativ können die Webdateien in einen separaten `antyx-os.github.io`-Repository gelegt werden.
-
-## Anpassen
-
-GitHub-Link in `index.html`:
-
-```html
-https://github.com/X7zvv/Antyx-OS
-```
-
-Texte, Roadmap und Versionsnummer können direkt in `index.html` geändert werden.
+The included GitHub Pages workflow automatically deploys the `website/` directory whenever website files are pushed to `main`.
